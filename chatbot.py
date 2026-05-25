@@ -14,7 +14,7 @@ FALLBACK_RESPONSE = (
 
 
 def clean_text(text):
-    """Prepare text for FAQ matching."""
+    """Clean text before comparing questions."""
     text = text.lower()
     text = re.sub(r"[^a-z0-9\s]", " ", text)
     text = re.sub(r"\s+", " ", text)
@@ -29,7 +29,7 @@ faq_vectors = vectorizer.fit_transform(faq_df["clean_question"])
 
 
 def get_bot_response(user_question):
-    """Return the best FAQ answer for a user's question."""
+    """Find and return the closest FAQ answer for a user's question."""
     cleaned_question = clean_text(user_question)
 
     if not cleaned_question:

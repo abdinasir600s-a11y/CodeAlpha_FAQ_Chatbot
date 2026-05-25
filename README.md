@@ -10,34 +10,51 @@ Task 2: Chatbot for FAQs
 
 ## Project Overview
 
-CodeAlpha FAQ Chatbot is a simple university admission FAQ chatbot built with Python and Streamlit. It allows users to ask admission-related questions and returns the most relevant answer from a stored FAQ dataset.
+CodeAlpha FAQ Chatbot is a simple university admission FAQ chatbot built with
+Python and Streamlit. Users can ask admission-related questions, and the app
+returns the most relevant saved FAQ answer.
+
+This project is designed for a beginner-friendly CodeAlpha internship
+submission. It does not use a paid AI API or a generative AI model.
 
 ## Project Objective
 
-The objective of this project is to create a beginner-friendly FAQ matching chatbot that uses basic Natural Language Processing techniques to compare a user's question with stored FAQ questions and return the best matching answer.
+The objective of this project is to create a simple FAQ matching chatbot that:
+
+- Stores a small FAQ dataset inside the project.
+- Cleans and preprocesses user questions.
+- Uses TF-IDF vectorization.
+- Uses cosine similarity to find the closest FAQ.
+- Returns a fallback message when no confident FAQ match is found.
 
 ## Features
 
-- User can ask university admission related questions.
-- FAQ questions are preprocessed before matching.
-- TF-IDF vectorization is used to represent questions.
-- Cosine similarity is used to find the closest FAQ.
-- The chatbot displays the answer, matched FAQ question, category, and confidence score.
+- User can ask university admission questions.
+- Chatbot preprocesses the question before matching.
+- TF-IDF vectorization converts questions into numerical form.
+- Cosine similarity finds the closest stored FAQ.
+- Response displays the chatbot answer.
+- Response displays the matched FAQ question for confident matches.
+- Response displays category for confident matches.
+- Response displays confidence score.
 - Low-confidence questions return a friendly fallback response.
 - Chat history works during the current Streamlit session.
-- Clear chat history button is available.
+- Clear Chat History button is available.
 - Sample questions are visible in the sidebar.
+- Empty input validation prevents crashes.
 
 ## NLP Approach
 
-This project does not use a generative AI model. It uses a simple FAQ matching approach:
+This is a FAQ matching chatbot, not a generative AI chatbot.
 
-1. Store FAQ questions and answers inside the project.
-2. Clean and preprocess the user question and FAQ questions.
-3. Convert questions into numerical vectors using TF-IDF.
-4. Compare the user question with FAQ questions using cosine similarity.
-5. Return the answer from the most similar FAQ if the confidence score is high enough.
-6. Return a fallback message if the confidence score is too low.
+The NLP workflow is:
+
+1. Store FAQ questions, answers, and categories in `faq_data.py`.
+2. Clean user questions and FAQ questions with `clean_text()`.
+3. Convert cleaned questions into TF-IDF vectors.
+4. Compare the user question with stored FAQ questions using cosine similarity.
+5. Return the best answer if the confidence score is high enough.
+6. Return a fallback response if the confidence score is too low.
 
 ## Technologies Used
 
@@ -57,19 +74,35 @@ CodeAlpha_FAQ_Chatbot/
 ├── requirements.txt
 ├── README.md
 ├── .gitignore
+├── .streamlit/
+│   └── config.toml
 └── screenshots/
-    └── .gitkeep
+    ├── home_page.png
+    ├── chatbot_response.png
+    └── no_match_response.png
 ```
 
 ## Installation Steps
 
-1. Clone or download this repository.
-2. Open the project folder in your terminal.
-3. Create and activate a virtual environment.
+1. Clone the repository.
+
+```bash
+git clone https://github.com/abdinasir600s-a11y/CodeAlpha_FAQ_Chatbot.git
+```
+
+2. Open the project folder.
+
+```bash
+cd CodeAlpha_FAQ_Chatbot
+```
+
+3. Create a virtual environment.
 
 ```bash
 python -m venv venv
 ```
+
+4. Activate the virtual environment.
 
 Windows:
 
@@ -83,10 +116,10 @@ macOS/Linux:
 source venv/bin/activate
 ```
 
-4. Install the required packages.
+5. Install the required packages.
 
 ```bash
-pip install -r requirements.txt
+python -m pip install -r requirements.txt
 ```
 
 ## How to Run the App
@@ -97,39 +130,42 @@ Run this command from the project folder:
 streamlit run app.py
 ```
 
+Then open the local Streamlit URL shown in the terminal.
+
 ## How to Use the Chatbot
 
-1. Open the Streamlit app in your browser.
-2. Type a university admission related question.
-3. Click the **Ask Chatbot** button.
-4. View the chatbot answer, matched FAQ question, category, and confidence score.
+1. Type a university admission related question in the input box.
+2. Click the **Ask Chatbot** button.
+3. Read the chatbot answer in the Chat History section.
+4. Review the matched FAQ, category, confidence score, and status.
 5. Use the sidebar button to clear chat history when needed.
 
 ## Screenshots
 
-Add application screenshots inside the `screenshots/` folder.
+### Home Page
 
-Example:
+![Home Page](screenshots/home_page.png)
 
-```text
-screenshots/homepage.png
-screenshots/chatbot_response.png
-```
+### Confident FAQ Response
+
+![Chatbot Response](screenshots/chatbot_response.png)
+
+### Fallback Response
+
+![No Match Response](screenshots/no_match_response.png)
 
 ## Demo Video
 
 Add your demo video link here:
 
 ```text
-Demo Video: Your LinkedIn or Google Drive video link
+Demo Video: Your LinkedIn or Google Drive demo video link
 ```
 
 ## GitHub Repository
 
-Add your GitHub repository link here:
-
 ```text
-GitHub Repository: https://github.com/abdinasir600s-a11y/CodeAlpha_FAQ_Chatbot
+https://github.com/abdinasir600s-a11y/CodeAlpha_FAQ_Chatbot
 ```
 
 ## Author
@@ -140,8 +176,12 @@ GitHub Repository: https://github.com/abdinasir600s-a11y/CodeAlpha_FAQ_Chatbot
 
 ## CodeAlpha Acknowledgement
 
-This project was created as part of the CodeAlpha Artificial Intelligence Internship program.
+This project was created as part of the CodeAlpha Artificial Intelligence
+Internship program.
 
 ## Disclaimer
 
-This is a FAQ matching chatbot, not a generative AI chatbot. It does not use OpenAI API, Gemini API, or any paid AI API. The chatbot only matches user questions with stored university admission FAQs and returns the most relevant saved answer.
+This is a FAQ matching chatbot, not a generative AI chatbot. It does not use
+OpenAI API, Gemini API, or any paid AI API. The chatbot only compares a user's
+question with stored university admission FAQs and returns the most relevant
+saved answer.
