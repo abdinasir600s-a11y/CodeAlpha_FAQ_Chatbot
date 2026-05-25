@@ -17,33 +17,33 @@ SAMPLE_QUESTIONS = [
 
 
 def add_custom_styles():
-    """Add simple CSS for a clean light Streamlit interface."""
+    """Add a clean light theme for the Streamlit interface."""
     st.markdown(
         """
         <style>
         :root {
-            --app-bg: #f8fafc;
+            --page-bg: #f8fafc;
             --card-bg: #ffffff;
-            --app-text: #0f172a;
-            --muted-text: #475569;
-            --soft-border: #e2e8f0;
-            --button-blue: #2563eb;
-            --button-hover: #1d4ed8;
+            --text: #0f172a;
+            --muted: #475569;
+            --border: #e2e8f0;
+            --blue: #2563eb;
+            --blue-hover: #1d4ed8;
         }
 
         html,
         body,
+        .stApp,
         [data-testid="stAppViewContainer"],
-        [data-testid="stMain"],
-        .stApp {
-            background: var(--app-bg) !important;
-            color: var(--app-text) !important;
-            font-family: "Inter", "Segoe UI", Arial, sans-serif;
+        [data-testid="stMain"] {
+            background: var(--page-bg) !important;
+            color: var(--text) !important;
+            font-family: "Segoe UI", Arial, sans-serif;
         }
 
         header[data-testid="stHeader"] {
-            background: var(--app-bg) !important;
-            border-bottom: 1px solid var(--soft-border);
+            background: var(--page-bg) !important;
+            border-bottom: 1px solid var(--border);
         }
 
         header[data-testid="stHeader"] button,
@@ -52,61 +52,59 @@ def add_custom_styles():
             display: none !important;
         }
 
-        [data-testid="stDecoration"],
-        [data-testid="stStatusWidget"] {
-            color: var(--app-text) !important;
-        }
-
         .main .block-container {
             max-width: 980px;
-            padding-top: 1.5rem;
             padding-bottom: 2rem;
+            padding-top: 1.5rem;
+        }
+
+        .app-header,
+        div[data-testid="stForm"],
+        .chat-card,
+        .sidebar-note {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
         }
 
         .app-header {
-            background: var(--card-bg);
-            border: 1px solid var(--soft-border);
-            border-radius: 8px;
             margin-bottom: 1rem;
             padding: 1rem;
         }
 
         .app-header h1 {
-            color: var(--app-text);
+            color: var(--text);
             font-size: 2rem;
             margin-bottom: 0.25rem;
         }
 
         .subtitle {
-            color: var(--button-blue);
+            color: var(--blue);
             font-size: 1.05rem;
             font-weight: 600;
             margin-bottom: 0.5rem;
         }
 
         .description {
-            color: var(--muted-text);
+            color: var(--muted);
             font-size: 1rem;
         }
 
         div[data-testid="stForm"] {
-            background: var(--card-bg);
-            border: 1px solid var(--soft-border);
-            border-radius: 8px;
             margin-bottom: 1rem;
             padding: 1rem 1rem 0.35rem 1rem;
         }
 
         div[data-testid="stForm"] label {
-            color: var(--app-text) !important;
+            color: var(--text) !important;
             font-weight: 600;
         }
 
         .stTextInput input {
             background: var(--card-bg);
-            border: 1px solid var(--soft-border);
+            border: 1px solid var(--border);
             border-radius: 6px;
-            color: var(--app-text);
+            color: var(--text);
         }
 
         .stTextInput input::placeholder {
@@ -115,14 +113,14 @@ def add_custom_styles():
         }
 
         .stTextInput input:focus {
-            border-color: var(--button-blue);
-            box-shadow: 0 0 0 1px var(--button-blue);
+            border-color: var(--blue);
+            box-shadow: 0 0 0 1px var(--blue);
         }
 
         div[data-testid="stFormSubmitButton"] button,
         div[data-testid="stButton"] button {
-            background: var(--button-blue);
-            border: 1px solid var(--button-blue);
+            background: var(--blue);
+            border: 1px solid var(--blue);
             border-radius: 6px;
             color: #ffffff;
             font-weight: 700;
@@ -136,40 +134,67 @@ def add_custom_styles():
 
         div[data-testid="stFormSubmitButton"] button:hover,
         div[data-testid="stButton"] button:hover {
-            background: var(--button-hover);
-            border-color: var(--button-hover);
+            background: var(--blue-hover);
+            border-color: var(--blue-hover);
             color: #ffffff;
         }
 
-        div[data-testid="stFormSubmitButton"] button:focus,
-        div[data-testid="stButton"] button:focus {
-            box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.45);
-            color: #ffffff;
+        section[data-testid="stSidebar"],
+        section[data-testid="stSidebar"] > div {
+            background: var(--page-bg) !important;
+            border-right: 1px solid var(--border);
+            color: var(--text) !important;
+        }
+
+        section[data-testid="stSidebar"] h1,
+        section[data-testid="stSidebar"] h2,
+        section[data-testid="stSidebar"] h3 {
+            color: var(--text);
+        }
+
+        section[data-testid="stSidebar"] p,
+        section[data-testid="stSidebar"] li,
+        section[data-testid="stSidebar"] .stMarkdown {
+            color: var(--muted);
+        }
+
+        section[data-testid="stSidebar"] button,
+        section[data-testid="stSidebar"] button * {
+            color: #ffffff !important;
+        }
+
+        .sidebar-note {
+            color: var(--text);
+            margin-bottom: 1rem;
+            margin-top: 0.8rem;
+            padding: 0.75rem;
+        }
+
+        .history-title {
+            color: var(--text);
+            margin-top: 0.5rem;
         }
 
         .chat-card {
-            background: var(--card-bg);
-            border: 1px solid var(--soft-border);
-            border-radius: 8px;
             margin: 0.85rem 0;
             padding: 1rem;
         }
 
         .user-question {
-            color: var(--button-hover);
+            color: var(--blue-hover);
             font-weight: 600;
             margin-bottom: 0.75rem;
         }
 
         .bot-answer {
-            color: var(--app-text);
+            color: var(--text);
             line-height: 1.55;
             margin-bottom: 0.9rem;
         }
 
         .meta-row {
-            border-top: 1px solid var(--soft-border);
-            color: var(--muted-text);
+            border-top: 1px solid var(--border);
+            color: var(--muted);
             font-size: 0.92rem;
             padding-top: 0.7rem;
         }
@@ -193,70 +218,6 @@ def add_custom_styles():
             background: #fef3c7;
             border: 1px solid #fde68a;
             color: #92400e;
-        }
-
-        section[data-testid="stSidebar"],
-        section[data-testid="stSidebar"] > div,
-        div[data-testid="stSidebar"] {
-            background: var(--app-bg) !important;
-            border-right: 1px solid var(--soft-border);
-            color: var(--app-text) !important;
-        }
-
-        section[data-testid="stSidebar"] * {
-            color: var(--app-text);
-        }
-
-        section[data-testid="stSidebar"] button,
-        section[data-testid="stSidebar"] button * {
-            color: #ffffff !important;
-        }
-
-        div[data-testid="stSidebar"] h1,
-        div[data-testid="stSidebar"] h2,
-        div[data-testid="stSidebar"] h3,
-        section[data-testid="stSidebar"] h1,
-        section[data-testid="stSidebar"] h2,
-        section[data-testid="stSidebar"] h3 {
-            color: var(--app-text);
-        }
-
-        div[data-testid="stSidebar"] p,
-        div[data-testid="stSidebar"] li,
-        div[data-testid="stSidebar"] .stMarkdown,
-        section[data-testid="stSidebar"] p,
-        section[data-testid="stSidebar"] li,
-        section[data-testid="stSidebar"] .stMarkdown {
-            color: var(--muted-text);
-        }
-
-        section[data-testid="stSidebar"] hr {
-            border-color: var(--soft-border);
-        }
-
-        .sidebar-note {
-            background: var(--card-bg);
-            border: 1px solid var(--soft-border);
-            border-radius: 8px;
-            color: var(--app-text);
-            margin-bottom: 1rem;
-            margin-top: 0.8rem;
-            padding: 0.75rem;
-        }
-
-        .history-title {
-            color: var(--app-text);
-            margin-top: 0.5rem;
-        }
-
-        div[data-testid="stAlert"] {
-            background: var(--card-bg);
-            border: 1px solid var(--soft-border);
-            color: var(--app-text) !important;
-        }
-
-        div[data-testid="stAlert"] * {
-            color: var(--app-text) !important;
         }
 
         div[data-testid="stAlert"][kind="warning"] {
@@ -338,7 +299,9 @@ def show_header():
     )
 
 
-def build_meta_details(response, status_text):
+def build_meta_details(response):
+    status_text = response["status"]
+
     if response["is_confident"]:
         matched_question = escape(response["matched_question"])
         category = escape(response["category"])
@@ -359,14 +322,10 @@ def build_meta_details(response, status_text):
 def show_chat_card(chat_item):
     response = chat_item["response"]
     status_class = "status-confident" if response["is_confident"] else "status-fallback"
-    status_text = (
-        "Confident answer"
-        if response["is_confident"]
-        else "No confident FAQ match found"
-    )
     question = escape(chat_item["question"])
     answer = escape(response["answer"])
-    meta_details = build_meta_details(response, status_text)
+    status_text = escape(response["status"])
+    meta_details = build_meta_details(response)
 
     chat_card_html = (
         '<div class="chat-card">'

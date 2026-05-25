@@ -11,10 +11,11 @@ CONFIDENCE_THRESHOLD = 0.30
 FALLBACK_RESPONSE = (
     "I could not find a confident answer. Please try asking your question in a different way."
 )
+FALLBACK_STATUS = "No confident FAQ match found"
 
 
 def clean_text(text):
-    """Clean text before comparing questions."""
+    """Clean text before matching it with stored FAQ questions."""
     text = text.lower()
     text = re.sub(r"[^a-z0-9\s]", " ", text)
     text = re.sub(r"\s+", " ", text)
@@ -29,16 +30,17 @@ faq_vectors = vectorizer.fit_transform(faq_df["clean_question"])
 
 
 def get_bot_response(user_question):
-    """Find and return the closest FAQ answer for a user's question."""
+    """Return the best FAQ response for a user question."""
     cleaned_question = clean_text(user_question)
 
     if not cleaned_question:
         return {
             "answer": FALLBACK_RESPONSE,
-            "matched_question": "No confident match",
-            "category": "Unknown",
+            "matched_question": None,
+            "category": None,
             "confidence_score": 0.0,
             "is_confident": False,
+            "status": FALLBACK_STATUS,
         }
 
     user_vector = vectorizer.transform([cleaned_question])
@@ -51,10 +53,11 @@ def get_bot_response(user_question):
     if not is_confident:
         return {
             "answer": FALLBACK_RESPONSE,
-            "matched_question": faq_df.iloc[best_match_index]["question"],
-            "category": faq_df.iloc[best_match_index]["category"],
+            "matched_question": None,
+            "category": None,
             "confidence_score": round(best_score, 2),
             "is_confident": False,
+            "status": FALLBACK_STATUS,
         }
 
     matched_faq = faq_df.iloc[best_match_index]
@@ -65,4 +68,5 @@ def get_bot_response(user_question):
         "category": matched_faq["category"],
         "confidence_score": round(best_score, 2),
         "is_confident": True,
+        "status": "Confident answer",
     }

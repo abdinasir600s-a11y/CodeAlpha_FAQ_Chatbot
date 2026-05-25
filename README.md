@@ -11,50 +11,52 @@ Task 2: Chatbot for FAQs
 ## Project Overview
 
 CodeAlpha FAQ Chatbot is a simple university admission FAQ chatbot built with
-Python and Streamlit. Users can ask admission-related questions, and the app
-returns the most relevant saved FAQ answer.
+Python and Streamlit. A user can ask an admission-related question, and the app
+returns the most relevant stored FAQ answer.
 
-This project is designed for a beginner-friendly CodeAlpha internship
-submission. It does not use a paid AI API or a generative AI model.
+This project is intentionally simple and beginner-friendly for a CodeAlpha
+Artificial Intelligence Internship submission.
 
 ## Project Objective
 
-The objective of this project is to create a simple FAQ matching chatbot that:
+The objective of this project is to build a FAQ matching chatbot that:
 
-- Stores a small FAQ dataset inside the project.
-- Cleans and preprocesses user questions.
+- Stores university admission FAQs inside the project.
+- Preprocesses user questions.
 - Uses TF-IDF vectorization.
-- Uses cosine similarity to find the closest FAQ.
-- Returns a fallback message when no confident FAQ match is found.
+- Uses cosine similarity to find the closest FAQ question.
+- Displays a fallback response when the similarity score is low.
 
 ## Features
 
-- User can ask university admission questions.
-- Chatbot preprocesses the question before matching.
-- TF-IDF vectorization converts questions into numerical form.
-- Cosine similarity finds the closest stored FAQ.
-- Response displays the chatbot answer.
-- Response displays the matched FAQ question for confident matches.
-- Response displays category for confident matches.
-- Response displays confidence score.
-- Low-confidence questions return a friendly fallback response.
+- User can ask a university admission question.
+- Stored FAQ questions are cleaned before matching.
+- User questions are cleaned before matching.
+- TF-IDF vectorization is used for text representation.
+- Cosine similarity is used to select the closest FAQ.
+- Chatbot answer is displayed in a clean response card.
+- Matched FAQ question is shown for confident answers.
+- Category is shown for confident answers.
+- Confidence score is displayed.
+- Fallback response is shown for unrelated questions.
 - Chat history works during the current Streamlit session.
-- Clear Chat History button is available.
+- Clear Chat History button is included.
 - Sample questions are visible in the sidebar.
-- Empty input validation prevents crashes.
+- Empty input validation is included.
 
 ## NLP Approach
 
-This is a FAQ matching chatbot, not a generative AI chatbot.
+This project is a FAQ matching chatbot, not a generative AI chatbot.
 
-The NLP workflow is:
+The NLP process is:
 
 1. Store FAQ questions, answers, and categories in `faq_data.py`.
-2. Clean user questions and FAQ questions with `clean_text()`.
-3. Convert cleaned questions into TF-IDF vectors.
-4. Compare the user question with stored FAQ questions using cosine similarity.
-5. Return the best answer if the confidence score is high enough.
-6. Return a fallback response if the confidence score is too low.
+2. Clean text using the `clean_text()` function.
+3. Convert FAQ questions into TF-IDF vectors.
+4. Convert the user question into a TF-IDF vector.
+5. Compare vectors using cosine similarity.
+6. Return the highest scoring FAQ answer when confidence is high enough.
+7. Return a fallback message when confidence is low.
 
 ## Technologies Used
 
@@ -74,6 +76,7 @@ CodeAlpha_FAQ_Chatbot/
 ├── requirements.txt
 ├── README.md
 ├── .gitignore
+├── .gitattributes
 ├── .streamlit/
 │   └── config.toml
 └── screenshots/
@@ -116,7 +119,7 @@ macOS/Linux:
 source venv/bin/activate
 ```
 
-5. Install the required packages.
+5. Install dependencies.
 
 ```bash
 python -m pip install -r requirements.txt
@@ -130,15 +133,14 @@ Run this command from the project folder:
 streamlit run app.py
 ```
 
-Then open the local Streamlit URL shown in the terminal.
-
 ## How to Use the Chatbot
 
-1. Type a university admission related question in the input box.
-2. Click the **Ask Chatbot** button.
-3. Read the chatbot answer in the Chat History section.
-4. Review the matched FAQ, category, confidence score, and status.
-5. Use the sidebar button to clear chat history when needed.
+1. Open the Streamlit app in your browser.
+2. Type a university admission question.
+3. Click **Ask Chatbot**.
+4. Review the chatbot answer, confidence score, and status.
+5. For confident answers, review the matched FAQ question and category.
+6. Use **Clear Chat History** to reset the current session chat.
 
 ## Screenshots
 
@@ -146,11 +148,11 @@ Then open the local Streamlit URL shown in the terminal.
 
 ![Home Page](screenshots/home_page.png)
 
-### Confident FAQ Response
+### Chatbot Response
 
 ![Chatbot Response](screenshots/chatbot_response.png)
 
-### Fallback Response
+### No Match Response
 
 ![No Match Response](screenshots/no_match_response.png)
 
